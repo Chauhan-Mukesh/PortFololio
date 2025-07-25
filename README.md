@@ -1,2 +1,7 @@
-# PortFololio
-Vue JS Portfolio
+## Portfolio Repository (Vue.js SPA on GitHub Pages)
+
+* **Vue.js Static Site:** Initialize a Vue project (via Vue CLI or Vite) for the portfolio. Organize the site as a single-page app (SPA) with sections (e.g. About, Projects, Contact). Store all content (headings, text, links, etc.) in data files (JSON, YAML or markdown) within the repo. This makes the site fully static and easy to render. You can optionally add a simple Dockerfile to pin the Node/Vue environment for consistent builds.
+* **Assets & Media:** Put all images and media (photos, logos, etc.) under a designated folder in the repo (e.g. `/assets` or `/public`). The Vue app can reference these static files. For example, profile photos or project screenshots would live in the portfolio repo itself, ensuring everything is versioned together.
+* **GitHub Pages Hosting:** Configure the repo for GitHub Pages. For a personal portfolio, you could name the repo `username.github.io` (deploys at `https://username.github.io`) or use the `gh-pages` branch on a normal repo. GitHub Pages will automatically serve the built static site from that repo.
+* **CI/CD Workflow:** Set up a GitHub Actions workflow (or use a Node script) to build and deploy on every commit. For example, a workflow can run `npm install` and `npm run build`, then push the contents of the `/dist` folder to the `gh-pages` branch. This automates publishing: on each push to `main`, Actions creates/updates the Pages branch, builds the Vue app, and commits the built files for deployment. (LogRocket’s tutorial shows a script automating these steps.) This ensures any change in the repo immediately redeploys the live site.
+* **Content Update Flow:** Whenever the portfolio content (text/images) is updated in the repo, the CI/CD pipeline rebuilds and redeploys. This makes the portfolio “auto-maintained”: you never manually edit the live site – commits to the repo handle it.
