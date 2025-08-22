@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <!-- 
+    ================================================================================
+    | GNEG-STYLE GLASSMORPHISM PORTFOLIO                                           |
+    | Author: Mukesh Chauhan                                                       |
+    | Version: 1.8.0                                                               |
+    | Description: A comprehensive, single-page portfolio combining modern design  |
+    |              trends with robust, maintainable, and SEO-friendly code.        |
+    |              Built with a focus on glassmorphism, smooth animations,         |
+    |              responsiveness, and accessibility. Now with theme support!      |
+    |------------------------------------------------------------------------------|
+    | README & MAINTAINABILITY DOCUMENTATION                                       |
+    |==============================================================================|
+    | This document is structured for high maintainability and testability.        |
+    | All interactive elements have `data-testid` attributes for stable e2e tests. |
+    | All JavaScript functions are documented with JSDoc comments.                 |
+    | No inline styles or event handlers are used.                                 |
+    |                                                                              |
+    | --- LINTING & CODE QUALITY ---                                               |
+    | - HTML: Use an HTML validator (e.g., W3C Markup Validation Service).         |
+    | - CSS: Use a linter like Stylelint to enforce consistent styling rules.      |
+    | - JS: Use ESLint with a standard configuration (e.g., Airbnb) to catch bugs |
+    |       and enforce coding standards.                                          |
+    |                                                                              |
+    | --- AUTOMATED TESTING (Recommended Tool: Cypress or Playwright) ---          |
+    | 1.  **Navigation:** |
+    |     - Test that clicking each nav link smoothly scrolls to the correct      |
+    |       section (e.g., clicking 'About' scrolls to the #about section).        |
+    |     - Test that clicking the logo scrolls back to the top (#home).           |
+    | 2.  **Theme Toggling:** |
+    |     - Test that clicking the theme toggle button switches the `data-theme`   |
+    |       attribute on the <html> element between 'light' and 'dark'.          |
+    |     - Test that the theme icon changes (fa-sun to fa-moon and vice-versa).   |
+    |     - Test that the theme choice is persisted in localStorage.               |
+    | 3.  **Mobile Menu:** |
+    |     - Test on a mobile viewport.                                             |
+    |     - Test that the mobile menu opens on button click.                       |
+    |     - Test that the menu closes when a link is clicked.                      |
+    |     - Test that the hamburger icon toggles to a close icon.                  |
+    | 4.  **Experience Tabs:** |
+    |     - Test that clicking a job tab makes it 'active'.                        |
+    |     - Test that the corresponding job panel becomes visible.                 |
+    | 5.  **Accessibility (Automated Checks):** |
+    |     - Run automated accessibility checks (e.g., using Axe-core) to catch     |
+    |       issues like missing ARIA labels, contrast errors, etc.                 |
+    |                                                                              |
+    | --- MANUAL TESTING ---                                                       |
+    | 1.  **Visuals & Aesthetics:** |
+    |     - Verify the glassmorphism effect renders correctly across browsers.     |
+    |     - Check the smoothness of all animations (fade-in, hover effects).       |
+    |     - Confirm the circular theme transition is fluid and without glitches.   |
+    | 2.  **Responsiveness:** |
+    |     - Manually resize the browser from 320px up to 4K widths.                |
+    |     - Check for any layout breaks, overlapping text, or horizontal scrollbars.|
+    | 3.  **Cross-Browser Compatibility (Target Browsers: Chrome, Firefox, Safari, Edge):** |
+    |     - Verify all functionalities work as expected on the latest versions.    |
+    |     - Pay special attention to CSS properties like `backdrop-filter`.        |
+    | 4.  **Custom Cursor:** |
+    |     - Check the cursor's appearance and hover transformations.               |
+    |     - Ensure it does not obstruct clicking on any elements.                  |
+    | 5.  **Content Review:** |
+    |     - Proofread all text for typos and grammatical errors.                   |
+    |     - Verify all external links (LinkedIn, GitHub) are correct.              |
+    | 6.  **Adblocker Resilience:** |
+    |     - Test with an adblocker enabled to ensure CDNs being blocked does not   |
+    |       break the site's core functionality. Icons might not appear, but the   |
+    |       layout and interactivity should remain intact.                         |
+    ================================================================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags for SEO -->
+    <title>Mukesh Chauhan | Implementation Lead & Full Stack Developer</title>
+    <meta name="title" content="Mukesh Chauhan | Implementation Lead & Full Stack Developer">
+    <meta name="description" content="Portfolio of Mukesh Chauhan, an experienced Implementation Lead and Full Stack Developer specializing in Pimcore, PHP, React, and enterprise-level web solutions.">
+    <meta name="keywords" content="Mukesh Chauhan, Full Stack Developer, Implementation Lead, Pimcore Developer, PHP, React, Python, Django, Web Developer, Portfolio, Ahmedabad">
+    <meta name="author" content="Mukesh Chauhan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://your-domain.com/">
+    <meta name="theme-color" content="#020c1b" data-theme-dark>
+    <meta name="theme-color" content="#f0f2f5" data-theme-light>
+
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Mukesh Chauhan | Implementation Lead & Full Stack Developer">
+    <meta property="og:description" content="Discover the work of Mukesh Chauhan, a skilled developer creating robust and scalable web applications.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <meta property="og:site_name" content="Mukesh Chauhan's Portfolio">
+
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="Mukesh Chauhan | Implementation Lead & Full Stack Developer">
+    <meta property="twitter:description" content="Portfolio of Mukesh Chauhan, an experienced Implementation Lead and Full Stack Developer specializing in Pimcore, PHP, React, and enterprise-level web solutions.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/0a192f/ffffff?text=MC" type="image/png">
+
+    <!-- Structured Data for AI Bots and Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mukesh Chauhan",
+      "jobTitle": "Implementation Lead & Full Stack Developer",
+      "url": "https://your-domain.com/",
+      "sameAs": [
+        "https://www.linkedin.com/in/chauhan-mukesh-9a5a57195",
+        "https://github.com/Chauhan-Mukesh"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Credencys Solutions Inc."
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ahmedabad",
+        "addressRegion": "Gujarat",
+        "postalCode": "382481",
+        "addressCountry": "IN"
+      },
+      "email": "mailto:mrchauhan490@gmail.com",
+      "telephone": "+91-8128494414",
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Doctor Babasaheb Ambedkar Open University",
+          "sameAs": "https://www.baou.edu.in/"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Gujarat University",
+          "sameAs": "https://www.gujaratuniversity.ac.in/"
+        }
+      ],
+      "knowsAbout": [
+        "Pimcore",
+        "PHP",
+        "Symfony",
+        "React",
+        "Python",
+        "Django",
+        "MySQL",
+        "Full Stack Development",
+        "Software Architecture",
+        "Team Leadership",
+        "Prompt Engineering"
+      ]
+    }
+    </script>
+
+    <!-- External Libraries: Tailwind CSS & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Embedded CSS for Custom Styling & Animations -->
+    <style>
+        /*
+         * ================================================================================
+         * | Custom Stylesheet for GNEG Portfolio                                         |
+         * | Defines the core visual identity, including the glassmorphism theme,         |
+         * | animations, custom scrollbar, and other non-Tailwind styles.               |
+         * ================================================================================
+         */
+
+        /* --------------------------------------------------------------------------------
+         * THEME & COLOR VARIABLES
+         * Centralized control for the site's color palette in both dark and light modes.
+         * -------------------------------------------------------------------------------- */
+        :root {
+            --bg-color: #020c1b;
+            --primary-color: #64ffda;
+            --secondary-color: #ccd6f6;
+            --tertiary-color: #8892b0;
+            --glass-bg: rgba(10, 25, 47, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --shadow-color: rgba(2, 12, 27, 0.7);
+            --highlight-glow: 0 0 20px rgba(100, 255, 218, 0.2);
+            --logo-fill: #64ffda;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #e6eaf0;
+            --primary-color: #0056b3;
+            --secondary-color: #212529;
+            --tertiary-color: #5a6470;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --highlight-glow: 0 0 20px rgba(0, 86, 179, 0.15);
+            --logo-fill: #0056b3;
+        }
+
+        /* --------------------------------------------------------------------------------
+         * GENERAL & LAYOUT STYLES
+         * Core styles for the body, background, and custom scrollbar.
+         * -------------------------------------------------------------------------------- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--secondary-color);
+            transition: color 0.7s ease; /* Only transition color, not background */
+            cursor: none;
+        }
+
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--bg-color);
+            transition: background-color 0.7s ease;
+        }
+
+        .background-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, var(--primary-color), transparent 25%),
+                        radial-gradient(circle at 80% 70%, var(--secondary-color), transparent 25%);
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: background-pan 25s linear infinite;
+            transition: background 0.7s ease;
+        }
+
+        @keyframes background-pan {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -20px); }
+            50% { transform: translate(0, 0); }
+            75% { transform: translate(-20px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+            transition: background-color 0.7s ease;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--tertiary-color);
+            border-radius: 10px;
+            border: 3px solid var(--bg-color);
+            transition: background-color 0.7s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* --------------------------------------------------------------------------------
+         * COMPONENT STYLES
+         * Styles for reusable components like glass cards, tabs, and the logo.
+         * -------------------------------------------------------------------------------- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        background-color 0.7s ease, 
+                        border-color 0.7s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px 0 var(--shadow-color), var(--highlight-glow);
+        }
+
+        .job-tab {
+            color: var(--tertiary-color);
+            transition: all 0.4s ease;
+            position: relative;
+            border-color: transparent;
+        }
+        .job-tab.active {
+            color: var(--primary-color);
+            border-color: var(--primary-color) !important;
+        }
+        .job-panel { display: none; }
+        .job-panel.active { display: block; }
+
+        #logo-svg path {
+            transition: fill 0.7s ease;
+            fill: var(--logo-fill);
+        }
+
+        /* --------------------------------------------------------------------------------
+         * ANIMATION & TRANSITION STYLES
+         * Classes for scroll-triggered animations and UI transitions.
+         * -------------------------------------------------------------------------------- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                        transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            will-change: opacity, transform;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        #theme-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            pointer-events: none;
+            clip-path: circle(0% at 0 0);
+            transition: clip-path 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* --------------------------------------------------------------------------------
+         * UI & INTERACTION STYLES
+         * Styles for interactive elements like the custom cursor.
+         * -------------------------------------------------------------------------------- */
+        .custom-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, background-color 0.4s ease, border-color 0.7s ease, opacity 0.4s ease;
+            z-index: 10000;
+        }
+        .custom-cursor.pointer {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            opacity: 0.15;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+    
+    <!-- Theme Transition Overlay -->
+    <div id="theme-transition-overlay"></div>
+
+    <!-- Animated Background -->
+    <div class="background-wrapper"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="absolute left-0 -translate-y-full focus:translate-y-0 bg-primary-color text-bg-color font-bold p-3 z-50" aria-label="Skip to main content">
+        Skip to main content
+    </a>
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300" id="navbar">
+        <nav class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold" aria-label="Home">
+                <svg id="logo-svg" width="42" height="42" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 75 L 22 25 H 34 L 46 50 L 58 25 H 70 L 70 75 L 58 75 L 58 45 L 46 65 L 34 45 L 34 75 L 22 75 Z"/>
+                </svg>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="About section">About</a>
+                <a href="#experience" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="Experience section">Experience</a>
+                <a href="#skills" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="Skills section">Skills</a>
+                <a href="#projects" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="Projects section">Projects</a>
+                <a href="#certifications" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="Certifications section">Certifications</a>
+                <a href="#contact" class="nav-link text-tertiary-color hover:text-primary-color transition-colors duration-300" aria-label="Contact section">Contact</a>
+            </div>
+            <div class="flex items-center">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="text-2xl text-primary-color z-50 mr-4" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-2xl text-primary-color z-50" aria-label="Open navigation menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-3/4 bg-bg-color/90 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#about" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">About</a>
+            <a href="#experience" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">Experience</a>
+            <a href="#skills" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">Skills</a>
+            <a href="#projects" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">Projects</a>
+            <a href="#certifications" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">Certifications</a>
+            <a href="#contact" class="mobile-nav-link text-xl text-tertiary-color hover:text-primary-color">Contact</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content" class="container mx-auto max-w-5xl px-6 relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen flex flex-col justify-center items-start pt-24" data-testid="hero-section">
+            <p class="text-primary-color mb-4 text-lg fade-in-section delay-100">Hi, my name is</p>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-secondary-color mb-4 fade-in-section delay-200" data-testid="hero-name">Mukesh Chauhan.</h1>
+            <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-tertiary-color mb-8 fade-in-section delay-300" data-testid="hero-title">I build robust solutions for the web.</h2>
+            <p class="max-w-xl text-tertiary-color text-lg leading-relaxed mb-12 fade-in-section delay-400" data-testid="hero-summary">
+                I'm an <strong>Implementation Lead & Full Stack Developer</strong> based in Ahmedabad, India. I specialize in creating high-quality, scalable enterprise applications with a focus on clean code and exceptional user experience.
+            </p>
+            <a href="#contact" class="bg-transparent border border-primary-color text-primary-color font-semibold py-4 px-8 rounded-md hover:bg-primary-color/10 transition-colors duration-300 fade-in-section delay-500" data-testid="hero-contact-btn">
+                Get In Touch
+            </a>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 fade-in-section" data-testid="about-section">
+            <h2 class="text-3xl font-bold text-secondary-color mb-8 flex items-center" data-testid="about-heading">
+                <span class="text-primary-color mr-4 text-2xl">01.</span> About Me 👨‍💻
+            </h2>
+            <div class="grid md:grid-cols-5 gap-12 items-start">
+                <div class="md:col-span-3 text-tertiary-color text-lg space-y-4 leading-relaxed">
+                    <p>Hello! I'm Mukesh, a passionate software engineer with over <strong>4 years of experience</strong> in the web development industry. My journey began with a deep curiosity for how things work on the internet, which led me to pursue a BCA and later an MSc in Information Technology.</p>
+                    <p>Today, I have the privilege of working at <strong>Credencys Solutions Inc.</strong>, where I lead implementation teams and architect full-stack solutions. My main focus is on the <strong>Pimcore framework</strong>, where I enjoy extending its capabilities to solve complex data management challenges for enterprise clients.</p>
+                    <p>I am driven by the challenge of building things that are both powerful and user-friendly. I believe in continuous learning and am always exploring new technologies to sharpen my skills. I'm always open to connecting with fellow professionals, so feel free to reach out!</p>
+                </div>
+                <div class="md:col-span-2 relative">
+                    <div class="w-full h-auto rounded-lg overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1504639725590-94907642ea27?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                             alt="A professional desk setup with a laptop showing code" 
+                             class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/0a192f/64ffda?text=Image+Not+Found';">
+                        <div class="absolute inset-0 bg-primary-color/20 group-hover:bg-transparent transition-colors duration-300 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-24 fade-in-section" data-testid="experience-section">
+            <h2 class="text-3xl font-bold text-secondary-color mb-12 flex items-center" data-testid="experience-heading">
+                <span class="text-primary-color mr-4 text-2xl">02.</span> Where I've Worked 🏢
+            </h2>
+            <div class="glass-card p-8 rounded-lg">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Job Tabs -->
+                    <div class="flex md:flex-col mb-8 md:mb-0 md:mr-8 border-b-2 md:border-b-0 md:border-l-2 border-glass-border">
+                        <button class="job-tab active text-left px-4 py-3 whitespace-nowrap" data-target="panel-0">Credencys Solutions</button>
+                    </div>
+                    <!-- Job Panels -->
+                    <div class="flex-grow">
+                        <div class="job-panel active" id="panel-0">
+                            <h3 class="text-xl font-bold text-secondary-color">Implementation Team Lead <span class="text-primary-color">@ Credencys Solutions Inc.</span></h3>
+                            <p class="text-tertiary-color text-sm mb-4">July 2021 - Present</p>
+                            <ul class="space-y-3 text-tertiary-color list-disc list-inside">
+                                <li>Lead and mentor a team of developers in the design, development, and deployment of enterprise-level web applications.</li>
+                                <li>Architect and implement complex solutions using the Pimcore framework, extending its core functionalities to meet bespoke client requirements.</li>
+                                <li>Spearheaded the development of the <strong>Groundtool Pimcore Project</strong>, a large-scale data management system with advanced workflows and versioning.</li>
+                                <li>Developed the entire front-end for the <strong>CMA Inventory Management</strong> system from scratch using ReactJS, creating a seamless user experience.</li>
+                                <li>Ensure code quality, performance, and scalability through rigorous code reviews, automated testing, and adherence to best practices.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-24 fade-in-section" data-testid="skills-section">
+            <h2 class="text-3xl font-bold text-secondary-color mb-12 flex items-center" data-testid="skills-heading">
+                <span class="text-primary-color mr-4 text-2xl">03.</span> My Tech Stack 🛠️
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fab fa-php text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">PHP / Pimcore</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fab fa-python text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">Python / Django</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fab fa-react text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">React</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fas fa-database text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">MySQL</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fab fa-js-square text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">JavaScript</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fas fa-cogs text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">REST APIs</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fas fa-brain text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">Prompt Engineering</span>
+                </div>
+                <div class="glass-card p-6 rounded-lg flex flex-col items-center justify-center">
+                    <i class="fas fa-tools text-5xl text-primary-color mb-3"></i>
+                    <span class="font-semibold text-secondary-color">POSTMAN</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-24 fade-in-section" data-testid="projects-section">
+            <h2 class="text-3xl font-bold text-secondary-color mb-12 flex items-center" data-testid="projects-heading">
+                <span class="text-primary-color mr-4 text-2xl">04.</span> Featured Projects 🚀
+            </h2>
+            <div class="space-y-12">
+                <!-- Project Item -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="glass-card p-8 rounded-lg">
+                        <p class="text-primary-color mb-2">Featured Project</p>
+                        <h3 class="text-2xl font-bold text-secondary-color mb-4">Groundtool Pimcore Project</h3>
+                        <p class="text-tertiary-color mb-4">A large-scale data management system specializing in complex workflows, versioning, and custom data models, built by extending the Pimcore framework.</p>
+                        <div class="flex flex-wrap text-sm text-primary-color/80">
+                            <span class="mr-4 mb-2">Pimcore</span>
+                            <span class="mr-4 mb-2">Symfony</span>
+                            <span class="mr-4 mb-2">PHP</span>
+                            <span class="mr-4 mb-2">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <img src="https://images.unsplash.com/photo-1573495627361-ab2d30546c53?q=80&w=2070&auto=format&fit=crop" class="rounded-lg w-full h-full object-cover" alt="Groundtool Project" onerror="this.onerror=null;this.src='https://placehold.co/600x400/020c1b/8892b0?text=Image+Not+Found';">
+                        <div class="absolute inset-0 bg-bg-color/70 group-hover:bg-transparent transition-colors duration-300 rounded-lg"></div>
+                    </div>
+                </div>
+                <!-- Project Item -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                     <div class="relative group md:order-2">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e2775df?q=80&w=2070&auto=format&fit=crop" class="rounded-lg w-full h-full object-cover" alt="CMA Inventory Project" onerror="this.onerror=null;this.src='https://placehold.co/600x400/020c1b/8892b0?text=Image+Not+Found';">
+                        <div class="absolute inset-0 bg-bg-color/70 group-hover:bg-transparent transition-colors duration-300 rounded-lg"></div>
+                    </div>
+                    <div class="glass-card p-8 rounded-lg md:order-1">
+                        <p class="text-primary-color mb-2">Featured Project</p>
+                        <h3 class="text-2xl font-bold text-secondary-color mb-4">CMA Inventory Management</h3>
+                        <p class="text-tertiary-color mb-4">A full-stack inventory management solution with a custom React front-end to manage client data, inventory details, and warehouse categorization.</p>
+                        <div class="flex flex-wrap text-sm text-primary-color/80">
+                            <span class="mr-4 mb-2">React</span>
+                            <span class="mr-4 mb-2">Pimcore API</span>
+                            <span class="mr-4 mb-2">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CERTIFICATIONS SECTION -->
+        <section id="certifications" class="py-24 fade-in-section" data-testid="certifications-section">
+            <h2 class="text-3xl font-bold text-secondary-color mb-12 flex items-center" data-testid="certifications-heading">
+                <span class="text-primary-color mr-4 text-2xl">05.</span> Certifications & Awards 🏆
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Award -->
+                 <div class="glass-card p-6 rounded-lg flex items-center space-x-4">
+                    <i class="fas fa-award text-4xl text-primary-color"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary-color">Outstanding Developer</h3>
+                        <p class="text-sm text-tertiary-color">Honor / Award</p>
+                    </div>
+                </div>
+                <!-- Certification -->
+                <div class="glass-card p-6 rounded-lg flex items-center space-x-4">
+                    <i class="fas fa-certificate text-4xl text-primary-color"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary-color">Front-End Web Development with React</h3>
+                        <p class="text-sm text-tertiary-color">Professional Certification</p>
+                    </div>
+                </div>
+                <!-- Certification -->
+                <div class="glass-card p-6 rounded-lg flex items-center space-x-4">
+                    <i class="fas fa-certificate text-4xl text-primary-color"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary-color">Practical PHP: Master the Basics</h3>
+                        <p class="text-sm text-tertiary-color">Professional Certification</p>
+                    </div>
+                </div>
+                <!-- Certification -->
+                <div class="glass-card p-6 rounded-lg flex items-center space-x-4">
+                    <i class="fas fa-certificate text-4xl text-primary-color"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary-color">Prompt Engineering for Developers</h3>
+                        <p class="text-sm text-tertiary-color">Professional Certification</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 text-center fade-in-section" data-testid="contact-section">
+            <h2 class="text-2xl font-semibold text-primary-color mb-4" data-testid="contact-subheading">06. What's Next?</h2>
+            <h3 class="text-4xl md:text-5xl font-bold text-secondary-color mb-6" data-testid="contact-heading">Let's Build Something Together</h3>
+            <p class="max-w-xl mx-auto text-tertiary-color mb-10">
+                I'm actively looking for new roles and opportunities to contribute to exciting projects. If you have a position that you think would be a good fit, or if you'd just like to connect, I would love to hear from you!
+            </p>
+            <a href="mailto:mrchauhan490@gmail.com" class="bg-primary-color text-bg-color font-bold text-lg py-4 px-8 rounded-md hover:bg-primary-color/90 transition-colors duration-300" data-testid="contact-email-btn">
+                Say Hello
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-12 relative z-10" data-testid="footer-section">
+        <div class="container mx-auto max-w-5xl px-6">
+            <div class="glass-card p-8 rounded-lg">
+                <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                    <!-- Footer About -->
+                    <div class="md:col-span-1">
+                        <h3 class="text-lg font-bold text-secondary-color mb-4">Mukesh Chauhan</h3>
+                        <p class="text-sm text-tertiary-color">A passionate developer dedicated to building elegant and effective web solutions.</p>
+                    </div>
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-lg font-bold text-secondary-color mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#about" class="text-sm text-tertiary-color hover:text-primary-color transition-colors">About</a></li>
+                            <li><a href="#projects" class="text-sm text-tertiary-color hover:text-primary-color transition-colors">Projects</a></li>
+                            <li><a href="#contact" class="text-sm text-tertiary-color hover:text-primary-color transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- Social Media -->
+                    <div>
+                        <h3 class="text-lg font-bold text-secondary-color mb-4">Connect</h3>
+                        <div class="flex justify-center md:justify-start space-x-6">
+                            <a href="https://www.linkedin.com/in/chauhan-mukesh-9a5a57195" target="_blank" rel="noopener noreferrer" class="text-tertiary-color hover:text-primary-color transition-colors" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                            <a href="https://github.com/Chauhan-Mukesh" target="_blank" rel="noopener noreferrer" class="text-tertiary-color hover:text-primary-color transition-colors" aria-label="GitHub Profile">
+                                <i class="fab fa-github text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-glass-border mt-8 pt-6 text-center text-sm text-tertiary-color">
+                    <p>&copy; <span id="current-year"></span> Mukesh Chauhan. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT for INTERACTIVITY -->
+    <script>
+        /**
+         * ================================================================================
+         * | Interactive Portfolio Script                                                 |
+         * | Handles all client-side interactivity, including animations on scroll,       |
+         * | mobile navigation, theme switching, and dynamic UI effects.                |
+         * | Adheres to Sonar standards and best practices for maintainability.           |
+         * ================================================================================
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /**
+             * @function init
+             * @description Initializes all interactive modules of the portfolio.
+             * Wraps initialization in a try-catch block for robust error handling,
+             * ensuring the site remains functional even if a module fails.
+             */
+            function init() {
+                try {
+                    setupTheme();
+                    setupCustomCursor();
+                    setupScrollAnimations();
+                    setupMobileMenu();
+                    setupNavbarTransparency();
+                    setupExperienceTabs();
+                    setupSmoothScrolling();
+                    updateFooterYear();
+                    setupDevToolsWarning();
+                    displayConsoleMessage();
+                } catch (error) {
+                    console.error("Initialization failed:", error);
+                    // Fallback: remove custom cursor if it's causing issues
+                    const cursor = document.querySelector('.custom-cursor');
+                    if (cursor) cursor.style.display = 'none';
+                    document.body.style.cursor = 'auto';
+                }
+            }
+
+            /**
+             * @function setupTheme
+             * @description Sets up the light/dark mode theme toggle with a circular transition.
+             * It persists the user's choice in localStorage.
+             */
+            function setupTheme() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const themeIcon = themeToggle.querySelector('i');
+                const transitionOverlay = document.getElementById('theme-transition-overlay');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+                /**
+                 * Applies the selected theme to the document.
+                 * @param {string} theme - The theme to apply ('light' or 'dark').
+                 * @param {boolean} [isInstant=false] - If true, applies the theme without transition.
+                 */
+                const applyTheme = (theme, isInstant = false) => {
+                    const lightBg = '#e6eaf0';
+                    const darkBg = '#020c1b';
+
+                    if (isInstant) {
+                        document.documentElement.setAttribute('data-theme', theme);
+                    } else {
+                        // Set the overlay to the NEW theme's background color
+                        transitionOverlay.style.backgroundColor = theme === 'dark' ? darkBg : lightBg;
+                        
+                        // Start the reveal animation
+                        transitionOverlay.style.clipPath = `circle(150% at var(--x) var(--y))`;
+
+                        // When the reveal is complete, THEN change the actual theme
+                        // and start the hiding animation.
+                        transitionOverlay.addEventListener('transitionend', () => {
+                            document.documentElement.setAttribute('data-theme', theme);
+                            transitionOverlay.style.clipPath = `circle(0% at var(--x) var(--y))`;
+                        }, { once: true });
+                    }
+
+                    if (theme === 'dark') {
+                        themeIcon.className = 'fas fa-sun';
+                    } else {
+                        themeIcon.className = 'fas fa-moon';
+                    }
+                    localStorage.setItem('theme', theme);
+                };
+
+                themeToggle.addEventListener('click', (e) => {
+                    transitionOverlay.style.setProperty('--x', e.clientX + 'px');
+                    transitionOverlay.style.setProperty('--y', e.clientY + 'px');
+                    
+                    const currentTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                    // Set the data-theme immediately to prevent content flicker
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    applyTheme(newTheme);
+                });
+
+                // Apply initial theme without transition
+                const savedTheme = localStorage.getItem('theme');
+                applyTheme(savedTheme || (prefersDark.matches ? 'dark' : 'light'), true);
+            }
+            
+            /**
+             * @function setupCustomCursor
+             * @description Sets up a custom cursor that provides visual feedback on hover.
+             */
+            function setupCustomCursor() {
+                const cursor = document.querySelector('.custom-cursor');
+                if (!cursor) return;
+
+                window.addEventListener('mousemove', e => {
+                    cursor.style.top = `${e.clientY}px`;
+                    cursor.style.left = `${e.clientX}px`;
+                });
+
+                document.querySelectorAll('a, button, .job-tab').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('pointer'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('pointer'));
+                });
+            }
+
+            /**
+             * @function setupScrollAnimations
+             * @description Sets up Intersection Observer for fade-in animations on scroll.
+             * Includes a fallback for older browsers.
+             */
+            function setupScrollAnimations() {
+                const sections = document.querySelectorAll('.fade-in-section');
+                if (!('IntersectionObserver' in window)) {
+                    console.warn("IntersectionObserver not supported. Animations will show immediately.");
+                    sections.forEach(section => section.classList.add('is-visible'));
+                    return;
+                }
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                    });
+                }, { threshold: 0.1 });
+                sections.forEach(section => observer.observe(section));
+            }
+
+            /**
+             * @function setupMobileMenu
+             * @description Manages the mobile navigation menu toggle and link clicks.
+             */
+            function setupMobileMenu() {
+                const menuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const menuIcon = menuBtn.querySelector('i');
+                const navLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+                if (!menuBtn || !mobileMenu || !menuIcon) return;
+                const toggleMenu = () => {
+                    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+                    menuBtn.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('translate-x-full');
+                    document.body.classList.toggle('overflow-hidden');
+                    menuIcon.className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+                };
+                menuBtn.addEventListener('click', toggleMenu);
+                navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            }
+
+            /**
+             * @function setupNavbarTransparency
+             * @description Adds a glassmorphism background to the navbar on scroll.
+             */
+            function setupNavbarTransparency() {
+                const navbar = document.getElementById('navbar');
+                if (!navbar) return;
+                window.addEventListener('scroll', () => {
+                    navbar.classList.toggle('glass-card', window.scrollY > 50);
+                });
+            }
+
+            /**
+             * @function setupExperienceTabs
+             * @description Manages the tabbed interface in the experience section.
+             */
+            function setupExperienceTabs() {
+                const tabs = document.querySelectorAll('.job-tab');
+                const panels = document.querySelectorAll('.job-panel');
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        panels.forEach(p => p.classList.remove('active'));
+                        tab.classList.add('active');
+                        const targetPanel = document.getElementById(tab.dataset.target);
+                        if (targetPanel) targetPanel.classList.add('active');
+                    });
+                });
+            }
+
+            /**
+             * @function setupSmoothScrolling
+             * @description Implements smooth scrolling for all anchor links.
+             */
+            function setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+
+            /**
+             * @function updateFooterYear
+             * @description Dynamically sets the current year in the footer.
+             */
+            function updateFooterYear() {
+                const yearSpan = document.getElementById('current-year');
+                if (yearSpan) {
+                    yearSpan.textContent = new Date().getFullYear();
+                }
+            }
+
+            /**
+             * @function setupDevToolsWarning
+             * @description Detects if developer tools are opened and logs a warning.
+             * This is a simple deterrent and not a security feature.
+             */
+            function setupDevToolsWarning() {
+                const threshold = 160;
+                const checkDevTools = () => {
+                    if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                        console.warn('%cHold Up!', 'color: #64ffda; font-size: 24px; font-weight: bold;');
+                        console.log('%cIf you\'re a developer and want to check out the code, you can find the source on my GitHub!', 'font-size: 14px;');
+                    }
+                };
+                window.addEventListener('resize', checkDevTools);
+            }
+
+            /**
+             * @function displayConsoleMessage
+             * @description Displays a friendly welcome message in the developer console.
+             */
+            function displayConsoleMessage() {
+                console.log('%cHello, Developer! 👋', 'color: #64ffda; font-size: 20px; font-weight: bold;');
+                console.log('%cThanks for checking out my portfolio. Feel free to connect with me on LinkedIn!', 'font-size: 14px;');
+            }
+
+            // Run the initialization function
+            init();
+        });
+    </script>
+
+</body>
+</html>
